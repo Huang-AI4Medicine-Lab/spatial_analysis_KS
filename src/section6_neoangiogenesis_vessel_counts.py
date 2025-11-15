@@ -21,7 +21,7 @@ import concurrent.futures
 
 # Path to the current script
 BASE_DIR = Path(__file__).resolve().parent
-
+DATA_DIR = BASE_DIR.parent/'data'
 # Function to create hexagonal grid cells
 def create_hexagonal_grid(gdf, hex_size):
     hexagons = []
@@ -74,10 +74,9 @@ def get_adata(path_block, category_column, vessels, cell_boundaries):
     return core_adata_gdf, vessels_subset
 
 def process_path_block(path_block, vessels, cell_boundaries, output_dir):
-    category_column = 'niche_with_tumor_proximity'
+    category_column = 'niches'
     hex_size = 42  # Size of the hexagon (radius)
-    output_folder = output_dir/f'hexgrid_c{category_column}_s{hex_size}'
-    output_folder.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     try:
         core_adata_gdf, vessels_subset = get_adata(path_block, category_column, vessels, cell_boundaries)
@@ -90,13 +89,12 @@ def process_path_block(path_block, vessels, cell_boundaries, output_dir):
         hex_gdf = count_vessels(vessels_subset, hex_gdf)
         hex_gdf['path_block_core'] = path_block
         hex_gdf['Stage'] = core_adata_gdf['Stage'].unique()[0]
-        with open(output_folder/f'{path_block}.pkl', 'wb') as f:
+        with open(output_dir/f'{path_block}.pkl', 'wb') as f:
             pickle.dump(hex_gdf, f)
     except Exception as e:
         print(f"Error processing {path_block}: {e}")
 
-def compile_all_vessel_counts(input_folder, output_dir):
-    output_dir = Path(output_dir)
+def compile_all_vessel_counts(input_folder):
     all_dfs = []
     for pkl_file in input_folder.iterdir():
         if pkl_file.suffix == '.pkl':
@@ -109,32 +107,32 @@ def compile_all_vessel_counts(input_folder, output_dir):
 def process_vessel_counts(vessel_counts):
     hex_size = 42
     area = (3 * np.sqrt(3) / 2) * (hex_size ** 2)
-    category_column = 'niche_with_tumor_proximity'
+    category_column = 'niches'
     vessel_counts['normalized_count'] = vessel_counts['vessel_count']/area
     vessel_counts_per_core_per_niche = vessel_counts.groupby(['path_block_core', category_column, 'Stage'], observed=False)['normalized_count'].mean().reset_index()
     vessel_counts_per_core_per_niche['normalized_count'].fillna(0, inplace=True)
     return vessel_counts_per_core_per_niche
 
 def process_all_cores():
-    adata_path = BASE_DIR/'adata.h5ad'
-    vessels_path = BASE_DIR/'vessels.pkl'
-    cell_boundaries_path = BASE_DIR/'cell_boundaries.pkl'
+    adata_path = DATA_DIR/'spatial_single_cell_KS_adata.h5ad'
+    vessels_path = DATA_DIR/'KS_vessels.pkl'
+    cell_boundaries_path = DATA_DIR/'KS_cell_boundaries.pkl'
+    print("Loading data...")
     adata = sc.read_h5ad(adata_path)
     vessels = pd.read_pickle(vessels_path)
     cell_boundaries = pd.read_pickle(cell_boundaries_path)
     for path_block in tqdm(adata.obs['path_block_core'].unique().tolist()):
-        output_dir = Path(BASE_DIR/'hexgrid_output')
+        output_dir = Path(DATA_DIR/'hexgrid_output')
         output_dir.mkdir(parents=True, exist_ok=True)
         process_path_block(path_block, vessels, cell_boundaries, output_dir)
 
 def normalize_counts():
-    input_folder = Path(BASE_DIR/'hexgrid_output/hexgrid_cniche_with_tumor_proximity_s42')
-    output_folder = Path(BASE_DIR/'hexgrid_output')
-    combined_vessel_counts = compile_all_vessel_counts(input_folder, output_folder)
+    input_folder = Path(DATA_DIR/'hexgrid_output/')
+    combined_vessel_counts = compile_all_vessel_counts(input_folder)
     processed_counts = process_vessel_counts(combined_vessel_counts)
-    processed_counts.to_pickle(output_folder/'vessel_counts.pkl')
+    processed_counts.to_pickle(DATA_DIR/'KS_vessel_counts.pkl')
 
 
 if __name__ == "__main__":
-    # process_all_cores()
+    process_all_cores()
     normalize_counts()

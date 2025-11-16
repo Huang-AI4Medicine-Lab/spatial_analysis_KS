@@ -26,8 +26,11 @@ This repository contains the complete analysis code underlying the manuscript: *
 │   ├── section4_LEC_VEC_trajectory.ipynb
 │   ├── section4_macrophage_trajectory.R
 │   ├── section4_fibroblast_trajectory.R
-│   ├── section5_spacetime_plots.ipynb  
+│   ├── section5_spacetime_plots.ipynb
+│   ├── section6_neoangiogenesis.ipynb
+│   ├── section6_neoangiogenesis_vessel_counts.py  
 │   ├── section7_Morans_analysis-Immune.ipynb  
+│   ├── section8_KS_progression_prediction.ipynb
 │   └── (other .py/.R scripts as needed)  
 └── …
 ```
@@ -37,8 +40,9 @@ Each notebook corresponds to a manuscript section (see manuscript Outline):
 * Section 1: Cell typing and spatial mapping
 * Section 3: Spatial niches and the immune microenvironment
 * Section 5: Spacetime plots (angiogenesis / vessel remodeling)
+* Section 6: Neoangiogenesis
 * Section 7: Moran’s I / immune gradient analyses
-
+* Section 8: KS progression prediction
 ---
 
 ## Data Availability

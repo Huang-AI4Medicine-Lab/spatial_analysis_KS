@@ -165,12 +165,12 @@ dir.create("figures/pseudotime_analysis/with_macrophages", recursive = TRUE, sho
 
 
 # Load the extracted data
-expression_matrix <- as.matrix(read.csv("data/expression_matrix_subset_with_macrophages.csv", row.names=1))
-cell_metadata <- read.csv("data/cell_metadata_subset_with_macrophages.csv", row.names=1)
-gene_metadata <- read.csv("data/gene_metadata_subset_with_macrophages.csv", row.names=1)
-gene_names <- read.csv("data/gene_names_subset_with_macrophages.csv", header=FALSE, stringsAsFactors=FALSE)[[1]]
-phate_coords <- read.csv("data/phate_embedding_with_macrophages.csv", row.names=1)
-leiden_clusters <- read.csv("data/leiden_cluster_ids_with_macrophages.csv", row.names = 1)
+expression_matrix <- as.matrix(read.csv("../data/expression_matrix_subset_with_macrophages.csv", row.names=1))
+cell_metadata <- read.csv("../data/cell_metadata_subset_with_macrophages.csv", row.names=1)
+gene_metadata <- read.csv("../data/gene_metadata_subset_with_macrophages.csv", row.names=1)
+gene_names <- read.csv("../data/gene_names_subset_with_macrophages.csv", header=FALSE, stringsAsFactors=FALSE)[[1]]
+phate_coords <- read.csv("../data/phate_embedding_with_macrophages.csv", row.names=1)
+leiden_clusters <- read.csv("../data/leiden_cluster_ids_with_macrophages.csv", row.names = 1)
 
 expression_matrix <- t(expression_matrix)
 

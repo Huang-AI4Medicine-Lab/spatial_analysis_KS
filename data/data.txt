@@ -1,0 +1,6 @@
+Primary dataset details are listed in:
+- data/README.md
+
+At minimum, place these files in this folder for most notebooks:
+- KS_adata_preprocessed.h5ad
+- KS_adata_raw.h5ad

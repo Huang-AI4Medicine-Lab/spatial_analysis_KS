@@ -166,12 +166,12 @@ dir.create(paste0("figures/pseudotime_analysis/", output_prefix, "/"), recursive
 
 
 # Construct file paths dynamically
-expression_matrix <- as.matrix(read.csv(paste0("data/expression_matrix_subset_", output_prefix, ".csv"), row.names=1))
-cell_metadata <- read.csv(paste0("data/cell_metadata_subset_", output_prefix, ".csv"), row.names=1)
-gene_metadata <- read.csv(paste0("data/gene_metadata_subset_", output_prefix, ".csv"), row.names=1)
-gene_names <- read.csv(paste0("data/gene_names_subset_", output_prefix, ".csv"), header=FALSE, stringsAsFactors=FALSE)[[1]]
-phate_coords <- read.csv(paste0("data/phate_embedding_", output_prefix, ".csv"), row.names=1)
-leiden_clusters <- read.csv(paste0("data/leiden_cluster_ids_", output_prefix, ".csv"), row.names=1)
+expression_matrix <- as.matrix(read.csv(paste0("../data/expression_matrix_subset_", output_prefix, ".csv"), row.names=1))
+cell_metadata <- read.csv(paste0("../data/cell_metadata_subset_", output_prefix, ".csv"), row.names=1)
+gene_metadata <- read.csv(paste0("../data/gene_metadata_subset_", output_prefix, ".csv"), row.names=1)
+gene_names <- read.csv(paste0("../data/gene_names_subset_", output_prefix, ".csv"), header=FALSE, stringsAsFactors=FALSE)[[1]]
+phate_coords <- read.csv(paste0("../data/phate_embedding_", output_prefix, ".csv"), row.names=1)
+leiden_clusters <- read.csv(paste0("../data/leiden_cluster_ids_", output_prefix, ".csv"), row.names=1)
 
 
 expression_matrix <- t(expression_matrix)

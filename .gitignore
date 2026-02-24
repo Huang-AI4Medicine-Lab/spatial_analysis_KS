@@ -1,0 +1,9 @@
+# macOS Finder metadata
+.DS_Store
+**/.DS_Store
+
+# Ignore manuscript artifacts
+manuscript/
+
+# Ignore supplementary deliverables
+supplementary_files/

@@ -19,3 +19,8 @@ esda
 splot
 pygam
 jupyterlab
+xgboost
+mrmr-selection
+phate
+gseapy
+scib-metrics

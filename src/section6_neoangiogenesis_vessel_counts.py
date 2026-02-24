@@ -114,7 +114,7 @@ def process_vessel_counts(vessel_counts):
     return vessel_counts_per_core_per_niche
 
 def process_all_cores():
-    adata_path = DATA_DIR/'spatial_single_cell_KS_adata.h5ad'
+    adata_path = DATA_DIR/'KS_adata_preprocessed.h5ad'
     vessels_path = DATA_DIR/'KS_vessels.pkl'
     cell_boundaries_path = DATA_DIR/'KS_cell_boundaries.pkl'
     print("Loading data...")

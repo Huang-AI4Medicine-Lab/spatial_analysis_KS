@@ -24,3 +24,8 @@ pygam
 rapids-singlecell
 cupy
 jupyterlab
+xgboost
+mrmr-selection
+phate
+gseapy
+scib-metrics

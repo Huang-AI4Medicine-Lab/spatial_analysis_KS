@@ -212,7 +212,7 @@ def load_xenium_TMA(sample, base_path, output_csv, save=True, return_adata=True,
     clusters_to_keep = cluster_counts[cluster_counts >= min_cells_per_core].index
     adata = adata[adata.obs['core_id_merged'].isin(clusters_to_keep)]
     
-    distance_df.to_csv(f'data/{sample}_distance_df_clusters.csv')
+    distance_df.to_csv(f'../data/{sample}_distance_df_clusters.csv')
     adata.obs['TMA_core_id'] = f"TMA_{sample.split('_')[2]}_" + adata.obs['core_id_merged'].astype(str)
     adata.obs_names = [f"{sample}_{r}" for r in range(len(adata))]
 

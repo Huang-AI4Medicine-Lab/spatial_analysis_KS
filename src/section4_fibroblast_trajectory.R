@@ -150,7 +150,21 @@ sub_cell_types_color_mapping <- c(
   'Cd8 Exhausted' = '#240c09'
 )
 
-setwd("C:/Users/ard212.PITT/development/KS_xenium")
+# Set the working directory to this script's location (the repo's `src/` folder)
+# so that data references like `../data/<file>` and the output folders below
+# resolve correctly on any machine. Works both via Rscript and in RStudio.
+.this_file <- local({
+  args <- commandArgs(trailingOnly = FALSE)
+  file_arg <- grep("^--file=", args, value = TRUE)
+  if (length(file_arg) > 0) {
+    normalizePath(sub("^--file=", "", file_arg))
+  } else if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
+    rstudioapi::getSourceEditorContext()$path
+  } else {
+    ""
+  }
+})
+if (nzchar(.this_file)) setwd(dirname(.this_file))
 
 # Increase allowed memory size to 2GB (adjust if needed)
 options(future.globals.maxSize = 2 * 1024^3)  # 2GB

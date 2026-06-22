@@ -6,6 +6,8 @@ scanpy
 anndata
 scikit-learn
 scipy
+statsmodels
+xgboost
 joblib
 hdbscan
 tqdm
@@ -13,6 +15,7 @@ matplotlib-venn
 upsetplot
 squidpy
 shapely
+alphashape
 geopandas
 libpysal
 esda

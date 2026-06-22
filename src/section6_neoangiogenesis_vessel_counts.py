@@ -115,7 +115,7 @@ def process_vessel_counts(vessel_counts):
 
 def process_all_cores():
     adata_path = DATA_DIR/'KS_adata_preprocessed.h5ad'
-    vessels_path = DATA_DIR/'KS_vessels.pkl'
+    vessels_path = DATA_DIR/'vessels.pkl'
     cell_boundaries_path = DATA_DIR/'KS_cell_boundaries.pkl'
     print("Loading data...")
     adata = sc.read_h5ad(adata_path)

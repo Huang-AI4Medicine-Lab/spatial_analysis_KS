@@ -7,3 +7,8 @@ manuscript/
 
 # Ignore supplementary deliverables
 supplementary_files/
+
+# Ignore data files
+data/*.csv
+data/*.h5ad
+*.h5ad

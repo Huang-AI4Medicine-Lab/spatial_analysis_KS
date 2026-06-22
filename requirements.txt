@@ -7,7 +7,6 @@ anndata
 scikit-learn
 scipy
 statsmodels
-xgboost
 joblib
 hdbscan
 tqdm
